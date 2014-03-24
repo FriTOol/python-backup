@@ -16,7 +16,7 @@ Targets backup (**backups_targets**):
 
 **databases** - the list of databases to create a list damp. If you specify a string instead of a list "\_\_ALL\_\_" then all databases will be backup
 
-**databases_excludes** - a list of databases that you want to exclude for backup. (Use for 'databases': '\_\_ AL_\_')
+**databases_excludes** - a list of databases that you want to exclude for backup. (Use for 'databases': '\_\_ ALL_\_')
 
 **dirs** - a list of absolute paths to folders for which you want to backup
 
