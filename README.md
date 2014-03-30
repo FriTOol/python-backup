@@ -15,7 +15,7 @@ Installation
 
 Targets backup (**backups_targets**):
 
-**databases** - the list of databases to create a list damp. If you specify a string instead of a list "\_\_ALL\_\_" then all databases will be backup
+**databases** - the list of databases to create a list dump. If you specify a string instead of a list "\_\_ALL\_\_" then all databases will be backup
 
 **databases_excludes** - a list of databases that you want to exclude for backup. (Use for 'databases': '\_\_ ALL_\_')
 
