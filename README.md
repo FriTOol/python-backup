@@ -10,6 +10,7 @@ Installation
 2. Customize configs:
 
 **backups_dir** - local directory for storing archives
+
 **delete_files_after_uploading** - delete local files after uploading on the FTP server
 
 Targets backup (**backups_targets**):
