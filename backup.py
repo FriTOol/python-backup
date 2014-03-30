@@ -100,7 +100,7 @@ def upload_backups(upload_files, config):
 
 
 def main(config):
-    config['backups_dir'] = os.path.abspath(config['backups_dir']) + '/'
+    config['backups_dir'] = os.path.abspath(config['backups_dir']) + os.sep
     if not os.path.exists(config['backups_dir']):
         print('Create folder ' + config['backups_dir'])
         os.mkdir(config['backups_dir'])
