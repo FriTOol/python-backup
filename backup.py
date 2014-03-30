@@ -95,7 +95,7 @@ def upload_backups(upload_files, config):
             break
         else:
             ftp.quit()
-            if config['delete_files_after_unloading']:
+            if config['delete_files_after_uploading']:
                 os.unlink(file)
 
 

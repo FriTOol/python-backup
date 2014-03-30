@@ -4,8 +4,8 @@ main_config = {
     # Folder for temporary storage of archives
     'backups_dir': './backups/',
 
-    # Delete files after unloading
-    'delete_files_after_unloading': True,
+    # Delete files after uploading
+    'delete_files_after_uploading': True,
 
     # Config MySQL
     'mysql': {
