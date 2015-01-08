@@ -65,7 +65,7 @@ def database_backup(config):
 def backup_files(config):
     """ Create an archive folder """
     for path in config['backups_targets']['dirs']:
-        print('Архивация директории: ' + path)
+        print('Backup directory: ' + path)
         backup_name = config['backups_dir'] + os.path.basename(os.path.abspath(path)) + \
             '_' + time.strftime('%Y-%m-%d') + '.tar.bz2'
 
@@ -80,23 +80,49 @@ def backup_files(config):
 
 def upload_backups(upload_files, config):
     """ Uploading files on the FTP server """
-    for file in upload_files:
-        print('Загрузка файла: ' + file)
-        try:
-            ftp = FTP()
-            ftp.connect(config['ftp']['host'], 21)
-            ftp.login(config['ftp']['user'], config['ftp']['password'])
-            ftp.cwd(config['ftp']['dir_destination'])
-            ftp.storbinary('STOR ' + os.path.basename(os.path.abspath(file)), open(file, 'rb'))
-        except Exception as e:
-            print(type(e))
-            print(e.args)
-            print(e)
-            break
-        else:
-            ftp.quit()
-            if config['delete_files_after_uploading']:
-                os.unlink(file)
+    print('Connect to FTP')
+    try:
+        ftp = FTP()
+        ftp.connect(config['ftp']['host'], 21)
+        ftp.login(config['ftp']['user'], config['ftp']['password'])
+        ftp.cwd(config['ftp']['dir_destination'])
+
+    except Exception as e:
+        print(type(e))
+        print(e.args)
+        print(e)
+        if config['delete_files_after_uploading']:
+            delete_files_after_uploading(upload_files)
+
+    else:
+        for file in upload_files:
+            print('Upload file: ' + file)
+
+            try:
+                ftp.storbinary('STOR ' + os.path.basename(os.path.abspath(file)), open(file, 'rb'))
+
+            except Exception as e:
+                if config['delete_files_after_uploading']:
+                    delete_files_after_uploading([file])
+
+                print(type(e))
+                print(e.args)
+                print(e)
+                break
+
+            else:
+                ftp.storbinary('STOR ' + os.path.basename(os.path.abspath(file)), open(file, 'rb'))
+                if config['delete_files_after_uploading']:
+                    delete_files_after_uploading([file])
+
+    ftp.quit()
+
+
+def delete_files_after_uploading(files):
+    """ Delete files """
+    for file in files:
+        print('Delete file: ' + file)
+        os.unlink(file)
 
 
 def main(config):

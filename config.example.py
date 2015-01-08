@@ -1,8 +1,10 @@
 __author__ = 'fritool'
 
+import sys
+
 main_config = {
     # Folder for temporary storage of archives
-    'backups_dir': './backups/',
+    'backups_dir': sys.path[0] + '/backups/',
 
     # Delete files after uploading
     'delete_files_after_uploading': True,
